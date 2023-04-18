@@ -1,25 +1,36 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import FetchApi from './FetchApi'
+import {
+  createBrowserRouter, 
+  createRoutesFromElements,
+  Route, 
+  RouterProvider
+} from 'react-router-dom'
+
+// PAGES //
+import Test from './pages/Dashboard/Test'
+import Add from './pages/Dashboard/Add'
+
+// LAYOUTS //
+import RootLayout from './layouts/RootLayout'
+import DashboardLayout from './layouts/DashboardLayout'
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<RootLayout />}>
+      <Route path="dashboard" element={<DashboardLayout />}>
+        <Route path="test" element={<Test />}/>
+        <Route path="add" element={<Add />}/>
+      </Route>
+    </Route>
+  )
+)
+
 
 function App() {
-
-  // componentDidMount() 
-  // {
-  //   fetch('http://localhost:8000/api/test')
-  //   .then(function(response) {
-  //     response.json().then(function(resp) {
-  //       console.log(resp);
-  //     })
-  //   })
-  // }
-
-
   return (
-    <div className="App">
-      <FetchApi/>
-    </div>
-  )
+    <RouterProvider router={router} />
+  );
 }
 
 export default App
