@@ -1,21 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import { db, analytics } from './Firebase-Config'
-import { doc, getDoc } from "firebase/firestore";
-import DocumentGet from './GetDocument'
-import DocumentSet from './SetDocument'
+import {
+  createBrowserRouter, 
+  createRoutesFromElements,
+  Route, 
+  RouterProvider
+} from 'react-router-dom'
+
+
+// PAGES //
+
+// LAYOUTS //
+import LoginLayout from './layouts/LoginLayout'
+import DashboardLayout from './layouts/DashboardLayout';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <LoginLayout />,
+  },
+  {
+    path: "dashboard/:userID",
+    element: <DashboardLayout />,
+  },
+]);
 
 function App() {
-
-  
-
-    return (
-      <div className="App">
-        <DocumentGet />
-      </div>
-    )
-  }
+  return (
+      <RouterProvider router={router} />
+  );
+}
 
 export default App
