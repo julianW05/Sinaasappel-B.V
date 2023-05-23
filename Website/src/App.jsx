@@ -8,6 +8,11 @@ import {
 
 
 // PAGES //
+import Beheer from './pages/Beheer'
+import Klachten from './pages/Klachten'
+import Boekingen from './pages/Boekingen'
+import Standplaatsen from './pages/Standplaatsen'
+import Inschrijven from './pages/Inschrijven'
 
 // LAYOUTS //
 import LoginLayout from './layouts/LoginLayout'
@@ -21,6 +26,28 @@ const router = createBrowserRouter([
   {
     path: "dashboard",
     element: <DashboardLayout />,
+    children: [
+      {
+        path: "beheer",
+        element: <Beheer />,
+      },
+      {
+        path: "klachten",
+        element: <Klachten />,
+      },
+      {
+        path: "boekingen",
+        element: <Boekingen />,
+      },
+      {
+        path: "standplaatsen",
+        element: <Standplaatsen />,
+      },
+      {
+        path: "inschrijven",
+        element: <Inschrijven />,
+      },
+    ],
   },
 ]);
 

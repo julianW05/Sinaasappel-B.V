@@ -1,7 +1,6 @@
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from '../Firebase-Config';
-import login from '../functions/login'
 import { useEffect, useState } from 'react'
 
 export default function RootLayout() {

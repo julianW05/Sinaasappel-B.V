@@ -1,11 +1,60 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
 }
 
 /* ----------LOGIN---------- */
 .login-wrapper button {
   margin-top: 20px;
+}
+
+
+/* ----------DASHBOARD---------- */
+.dashboard {
+  --bs-gutter-x: 0 !important;
+}
+.dashboard .logo,
+.dashboard .top_nav_bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0; 
+}
+
+.dashboard .top_nav_bar,
+.dashboard .main_nav,
+.dashboard .logo {
+  background-color: #4c5b5c;
+  color: #f0edee;
+}
+
+.dashboard .main_content {
+  background-color: #f0edee;
+}
+
+.dashboard .main_nav {
+  height: 800px;
+}
+
+.dashboard .main_nav .DashNavItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard .main_nav .DashNavItem a {
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+  text-decoration: none;
+  color: #f0edee;
+}
+.dashboard .main_nav .DashNavItem a:active {
+  background-color: #de541e;
+}   
+.dashboard .main_nav .DashNavItem a:hover {
+  background-color: #de541e;
+  transition: all 0.3s ease-in-out;
 }

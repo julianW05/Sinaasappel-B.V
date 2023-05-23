@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from '../Firebase-Config';
 
@@ -23,27 +23,37 @@ export default function DashboardLayout() {
     }
 
     useEffect(() => {
-        if (userID == null) {
-            navigate('/');
-        }
         getUserData();
     }, [])
 
     return (
-        <div className="row">
-            <h1 className="col-md-12">Dashboard</h1>
-            <h2 className="col-md-12">Welcome {user?.name}</h2>
-
-            <nav className="row">
+        <div className="dashboard row">
+            <div className="col-md-3 logo">
+                <h1>Dashboard</h1>
+            </div>
+            <div className="col-md-9 top_nav_bar">
+                <h2>Welkom {user?.name}</h2>
+            </div>
+            <div className="main_nav col-md-3">
                 <div className="col-md-12 DashNavItem">
-                    <NavLink to="Test">another test page</NavLink>
+                    <NavLink to={`Klachten?userID=${userID}`}>Klachten</NavLink>
                 </div>
                 <div className="col-md-12 DashNavItem">
-                    <NavLink to="Add">Add something</NavLink>
+                    <NavLink to={`Boekingen?userID=${userID}`}>Boekingen</NavLink>
                 </div>
+                <div className="col-md-12 DashNavItem">
+                    <NavLink to={`Standplaatsen?userID=${userID}`}>Standplaatsen</NavLink>
+                </div>
+                <div className="col-md-12 DashNavItem">
+                    <NavLink to={`Inschrijven?userID=${userID}`}>Inschrijven</NavLink>
+                </div>
+                <div className="col-md-12 DashNavItem">
+                    <NavLink to={`Beheer?userID=${userID}`}>Beheer</NavLink>
+                </div>
+            </div>
+            <nav className="main_content col-md-9">
+                <Outlet />
             </nav>
-
-            <Outlet />
         </div>
     )
 }
