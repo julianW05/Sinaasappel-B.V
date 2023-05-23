@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 const login = (username, password) => {
     let user;
     const navigate = useNavigate();
-    navigate('/dashboard');
 
     const fetchFirebaseUser = async() => {
         const q = query(collection(db, "users"), where("name", "==", username), where("password", "==", password));

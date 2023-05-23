@@ -17,7 +17,7 @@ export default function RootLayout() {
     querySnapshot.forEach((doc) => {
     userID = doc.id;
     console.log(userID);
-    navigate('/dashboard/' + userID);
+    navigate('/dashboard?userID=' + userID);
     });
     } else {
       alert("Please fill in all fields")
