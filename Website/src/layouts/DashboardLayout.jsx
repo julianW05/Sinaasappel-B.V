@@ -152,9 +152,9 @@ export default function DashboardLayout() {
                 ): null}
 
             </div>
-            <nav className="main_content col-md-9">
+            <div className="main_content col-md-9">
                 <Outlet />
-            </nav>
+            </div>
         </div>
     )
 }
