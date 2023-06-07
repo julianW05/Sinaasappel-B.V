@@ -145,16 +145,15 @@
 
 .klachten .klachten_box {
   width: 70%;
-  height: 70%;
   background-color: #4c5b5c;
   border-radius: 10px;
   color: white;
   text-align: center;
+  justify-content: center;
   padding: 25px;
 }
 
 .klachten .klachten_list {
-  height: 80%;
   display: flex;
   justify-content: center;
   align-items: start;
@@ -167,4 +166,29 @@
 
 .klachten .klachten_list table td {
   padding: 10px;
+}
+
+.klachten .klachten_list table a {
+  color: #f0edee;
+  text-decoration: none;
+}
+.klachten .klachten_list table a:hover {
+  color: #de541e;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.klachten .details_popup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background-color: #353d3d;
+  margin: 20px 0px;
+  padding: 7px 0;
+}
+
+.klachten .details_popup a {
+  color: red;
+  text-decoration: none;
 }
