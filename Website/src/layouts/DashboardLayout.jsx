@@ -7,7 +7,6 @@ export default function DashboardLayout() {
     const userID = new URLSearchParams(location.search).get('userID');
     const [user, setUser] = useState();
     const navigate = useNavigate();
-    console.log(userID);
 
     const getUserData = async() => {
         const docRef = doc(db, "users", userID);
@@ -87,6 +86,33 @@ export default function DashboardLayout() {
 
                 {isBeheerder ? (
                     <div className="col-md-12 DashNavItem">
+                        <NavLink to={`Klacht_aanmaken/${userID}`}>Klacht Indienen</NavLink>
+                    </div>
+                ): null}
+                {isAdmin ? (
+                    <div className="col-md-12 DashNavItem">
+                        <NavLink to={`Klacht_aanmaken/${userID}`}>Klacht Indienen</NavLink>
+                    </div>
+                ): null}
+                {isShoonamker ? (
+                    <div className="col-md-12 DashNavItem">
+                        <NavLink to={`Klacht_aanmaken/${userID}`}>Klacht Indienen</NavLink>
+                    </div>
+                ): null}
+                {isOnderhoudsmedewerker ? (
+                    <div className="col-md-12 DashNavItem">
+                        <NavLink to={`Klacht_aanmaken/${userID}`}>Klacht Indienen</NavLink>
+                    </div>
+                ): null}
+                {isKlant ? (
+                    <div className="col-md-12 DashNavItem">
+                        <NavLink to={`Klacht_aanmaken/${userID}`}>Klacht Indienen</NavLink>
+                    </div>
+                ): null}
+
+
+                {isBeheerder ? (
+                    <div className="col-md-12 DashNavItem">
                         <NavLink to={`Boekingen?userID=${userID}`}>Boekingen</NavLink>
                     </div>
                 ): null}
@@ -152,9 +178,9 @@ export default function DashboardLayout() {
                 ): null}
 
             </div>
-            <nav className="main_content col-md-9">
+            <div className="main_content col-md-9">
                 <Outlet />
-            </nav>
+            </div>
         </div>
     )
 }

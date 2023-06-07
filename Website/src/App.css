@@ -6,8 +6,73 @@
 }
 
 /* ----------LOGIN---------- */
-.login-wrapper button {
-  margin-top: 20px;
+
+.login {
+  width: 100%;
+}
+
+.login .titel {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.login .titel .line {
+  border: #de541e 1px solid;
+  width: 35%;
+  margin: 20px 0;
+}
+
+.login .right, .login .left {
+  height: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login .right {
+  background-image: url(./assets/Logo.png);
+  background-repeat: no-repeat;
+  background-size: 200px;
+  background-position:top right;
+}
+
+.login .right .tekst {
+  margin-top: 180px;
+  width: 70%;
+}
+
+.login .right .copyright {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+}
+
+.login .left .login_box {
+  background-color: #4c5b5c;
+  padding: 20px 50px;
+  box-shadow: 0 0 50px #4c5b5c;
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  text-align: center;
+  row-gap: 20px;
+  margin-top: 180px;
+}
+
+.login .left .login_box label {
+  margin: 20px 0px;
+}
+
+.login .left .login_box button {
+  background-color: transparent;
+  border-radius: 5px;
+} .login .left .login_box button:hover {
+  background-color: #de541e;
+  transition: all 0.3s ease-in-out;
 }
 
 
@@ -57,4 +122,80 @@
 .dashboard .main_nav .DashNavItem a:hover {
   background-color: #de541e;
   transition: all 0.3s ease-in-out;
+}
+
+/* ----------KLACHTEN---------- */
+.main_back {
+  width: 100%;
+  height: 100%;
+  background-image: url(./assets/Banner1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.main_back .blur {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+}
+
+.main_back .main_box {
+  width: 70%;
+  background-color: #4c5b5c;
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+  justify-content: center;
+  padding: 25px;
+}
+
+.main_back .klachten_list {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+
+.main_back .klachten_list table{
+  border-collapse: separate;
+  border-spacing: 0 15px;
+}
+
+.main_back .klachten_list table td {
+  padding: 10px;
+}
+
+.main_back .klachten_list table a {
+  color: #f0edee;
+  text-decoration: none;
+}
+.main_back .klachten_list table a:hover {
+  color: #de541e;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.main_back .details_popup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background-color: #353d3d;
+  margin: 20px 0px;
+  padding: 7px 0;
+}
+
+.main_back .details_popup a {
+  color: red;
+  text-decoration: none;
+}
+
+.main_back .klachten_aanmaken {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  align-items: center;
 }
