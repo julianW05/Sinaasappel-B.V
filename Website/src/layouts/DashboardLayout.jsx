@@ -7,7 +7,6 @@ export default function DashboardLayout() {
     const userID = new URLSearchParams(location.search).get('userID');
     const [user, setUser] = useState();
     const navigate = useNavigate();
-    console.log(userID);
 
     const getUserData = async() => {
         const docRef = doc(db, "users", userID);
