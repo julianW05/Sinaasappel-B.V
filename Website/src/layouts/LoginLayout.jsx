@@ -22,7 +22,7 @@ export default function RootLayout() {
         querySnapshot.forEach((doc) => {
           userID = doc.id;
           console.log(userID);
-          navigate("/dashboard?userID=" + userID);
+          navigate("/dashboard/" + userID);
         });
       } else {
         setErrorMessage("Email of wachtwoord incorrect.");

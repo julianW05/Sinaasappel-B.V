@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Link, Outlet, useNavigate, useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from '../Firebase-Config';
 
 export default function DashboardLayout() {
-    const userID = new URLSearchParams(location.search).get('userID');
+    const { userID } = useParams();
     const [user, setUser] = useState();
     const navigate = useNavigate();
 
     const getUserData = async() => {
+        console.log(userID);
         const docRef = doc(db, "users", userID);
         const docSnap = await getDoc(docRef);
         
@@ -64,116 +65,116 @@ export default function DashboardLayout() {
             <div className="main_nav col-md-3">
                 {isBeheerder ? (
                     <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Klachten?userID=${userID}`}>Klachten</NavLink>
+                        <NavLink to={`Klachten`}>Klachten</NavLink>
                     </div>
                 ): null}
                 {isAdmin ? (
                     <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Klachten?userID=${userID}`}>Klachten</NavLink>
+                        <NavLink to={`Klachten`}>Klachten</NavLink>
                     </div>
                 ): null}
                 {isShoonamker ? (
                     <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Klachten?userID=${userID}`}>Klachten</NavLink>
+                        <NavLink to={`Klachten`}>Klachten</NavLink>
                     </div>
                 ): null}
                 {isOnderhoudsmedewerker ? (
                     <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Klachten?userID=${userID}`}>Klachten</NavLink>
+                        <NavLink to={`Klachten`}>Klachten</NavLink>
                     </div>
                 ): null}
 
 
                 {isBeheerder ? (
                     <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Klacht_aanmaken/${userID}`}>Klacht Indienen</NavLink>
+                        <NavLink to={`Klacht_aanmaken`}>Klacht Indienen</NavLink>
                     </div>
                 ): null}
                 {isAdmin ? (
                     <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Klacht_aanmaken/${userID}`}>Klacht Indienen</NavLink>
+                        <NavLink to={`Klacht_aanmaken`}>Klacht Indienen</NavLink>
                     </div>
                 ): null}
                 {isShoonamker ? (
                     <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Klacht_aanmaken/${userID}`}>Klacht Indienen</NavLink>
+                        <NavLink to={`Klacht_aanmaken`}>Klacht Indienen</NavLink>
                     </div>
                 ): null}
                 {isOnderhoudsmedewerker ? (
                     <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Klacht_aanmaken/${userID}`}>Klacht Indienen</NavLink>
+                        <NavLink to={`Klacht_aanmaken`}>Klacht Indienen</NavLink>
                     </div>
                 ): null}
                 {isKlant ? (
                     <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Klacht_aanmaken/${userID}`}>Klacht Indienen</NavLink>
+                        <NavLink to={`Klacht_aanmaken`}>Klacht Indienen</NavLink>
                     </div>
                 ): null}
 
 
                 {isBeheerder ? (
                     <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Boekingen?userID=${userID}`}>Boekingen</NavLink>
+                        <NavLink to={`Boekingen`}>Boekingen</NavLink>
                     </div>
                 ): null}
                 {isAdmin ? (
                     <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Boekingen?userID=${userID}`}>Boekingen</NavLink>
+                        <NavLink to={`Boekingen`}>Boekingen</NavLink>
                     </div>
                 ): null}
 
 
                 {isBeheerder ? (
                     <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Standplaatsen?userID=${userID}`}>Standplaatsen</NavLink>
+                        <NavLink to={`Standplaatsen`}>Standplaatsen</NavLink>
                     </div>
                 ): null}
                 {isAdmin ? (
                     <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Standplaatsen?userID=${userID}`}>Standplaatsen</NavLink>
+                        <NavLink to={`Standplaatsen`}>Standplaatsen</NavLink>
                     </div>
                 ): null}
                 {isShoonamker ? (
                      <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Standplaatsen?userID=${userID}`}>Standplaatsen</NavLink>
+                        <NavLink to={`Standplaatsen`}>Standplaatsen</NavLink>
                     </div>
                 ): null}
                 {isOnderhoudsmedewerker ? (
                      <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Standplaatsen?userID=${userID}`}>Standplaatsen</NavLink>
+                        <NavLink to={`Standplaatsen`}>Standplaatsen</NavLink>
                     </div>
                 ): null}
 
 
                 {isBeheerder ? (
                     <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Inschrijven?userID=${userID}`}>Inschrijven</NavLink>
+                        <NavLink to={`Inschrijven`}>Inschrijven</NavLink>
                     </div>
                 ): null}
                 {isAdmin ? (
                     <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Inschrijven?userID=${userID}`}>Inschrijven</NavLink>
+                        <NavLink to={`Inschrijven`}>Inschrijven</NavLink>
                     </div>
                 ): null}
                 {isShoonamker ? (
                     <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Inschrijven?userID=${userID}`}>Inschrijven</NavLink>
+                        <NavLink to={`Inschrijven`}>Inschrijven</NavLink>
                     </div>
                 ): null}
                 {isOnderhoudsmedewerker ? (
                     <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Inschrijven?userID=${userID}`}>Inschrijven</NavLink>
+                        <NavLink to={`Inschrijven`}>Inschrijven</NavLink>
                     </div>
                 ): null}
                 {isKlant ? (
                     <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Inschrijven?userID=${userID}`}>Inschrijven</NavLink>
+                        <NavLink to={`Inschrijven`}>Inschrijven</NavLink>
                     </div>
                 ): null}
 
                 {isBeheerder ? (
                     <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Beheer?userID=${userID}`}>Beheer</NavLink>
+                        <NavLink to={`Beheer`}>Beheer</NavLink>
                     </div>
                 ): null}
 

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Link, Outlet, useNavigate, useParams } from "react-router-dom";
 import { collection, query, getDocs, doc, deleteDoc } from "firebase/firestore";
 import { db } from '../Firebase-Config';
 
 export default function Klachten() {
-    const userID = new URLSearchParams(location.search).get('userID');
+    const { userID } = useParams();
     let klachtenTemp = [];
     const [klachten, setKlachten] = useState([]);
 
@@ -45,8 +45,8 @@ export default function Klachten() {
                             <tbody>
                                 {klachten.map((klacht) => 
                                     <tr className="klacht" key={klacht.id}>
-                                        <td>{klacht._document.data.value.mapValue.fields.titel.stringValue}</td>
-                                        <td><Link to={`/dashboard/Klachten/details/${userID}/${klacht.id}`}>Details</Link></td>
+                                        <td><strong>{klacht._document.data.value.mapValue.fields.titel.stringValue}</strong></td>
+                                        <td><Link to={`details/${klacht.id}`}>Details</Link></td>
                                         <td><a onClick={() => handleDeleteClick(klacht.id)}>Verwijderen</a></td>
                                         <td><a>Toewijzen</a></td>
                                     </tr>
