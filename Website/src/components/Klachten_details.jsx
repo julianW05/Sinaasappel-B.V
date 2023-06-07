@@ -30,7 +30,7 @@ export default function Klachten_details() {
     return (
         <div className="details_popup row">
             <h1 className="col-md-11">Klacht details</h1>
-            <h2 className="col-md-1"><Link to={`..?userID=${userID}`}>X</Link></h2>
+            <h2 className="col-md-1"><Link to={`..`}>X</Link></h2>
             <p className="col-md-12">{klacht.details}</p>
         </div>
     )

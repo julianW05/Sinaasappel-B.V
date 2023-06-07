@@ -32,7 +32,7 @@ const router = createBrowserRouter([
     element: <BookingLayout />,
   },
   {
-    path: "dashboard",
+    path: "dashboard/:userID",
     element: <DashboardLayout />,
     children: [
       {
@@ -44,13 +44,13 @@ const router = createBrowserRouter([
         element: <Klachten />,
         children: [
           {
-            path: "details/:userID/:klachtID",
+            path: "details/:klachtID",
             element: <Klachten_details />,
           },
         ],
       },
       {
-        path: "klacht_aanmaken/:userID",
+        path: "klacht_aanmaken",
         element: <Klacht_aanmaken />,
       },
       {
