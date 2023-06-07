@@ -1,30 +1,38 @@
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from '../Firebase-Config';
-import { useEffect, useState } from 'react'
+import { db } from "../Firebase-Config";
+import { useEffect, useState } from "react";
 
 export default function RootLayout() {
-  const [username, setUserName] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   let userID;
 
-  const fetchFirebaseUser = async() => {
-    if (username != null && password != null) {
-    const q = query(collection(db, "users"), where("name", "==", username), where("password", "==", password));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-    userID = doc.id;
-    console.log(userID);
-    navigate('/dashboard?userID=' + userID);
-    });
+  const fetchFirebaseUser = async () => {
+    if (email !== "" && password !== "") {
+      const q = query(
+        collection(db, "users"),
+        where("email", "==", email),
+        where("password", "==", password)
+      );
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        querySnapshot.forEach((doc) => {
+          userID = doc.id;
+          console.log(userID);
+          navigate("/dashboard?userID=" + userID);
+        });
+      } else {
+        setErrorMessage("Email of wachtwoord incorrect.");
+      }
     } else {
-      alert("Please fill in all fields")
+      setErrorMessage("Vul alle velden in.");
     }
-  }
+  };
 
-  useEffect(() => {
-  }, [])
+  useEffect(() => {}, []);
 
   return (
     <div className="login row">
@@ -37,9 +45,9 @@ export default function RootLayout() {
         <div className="login_box row">
           <h1 className="col-md-12">Log In</h1>
           <form className="col-md-12" onSubmit={(event) => event.preventDefault()}>
-            <label className="col-md-12">
-              <p>Gebruikersnaam</p>
-              <input type="text" onChange={e => setUserName(e.target.value)}/>
+            <label>
+              <p>Email</p>
+              <input type="text" onChange={(e) => setEmail(e.target.value)} />
             </label>
             <label className="col-md-12">
               <p>Wachtwoord</p>
@@ -61,7 +69,7 @@ export default function RootLayout() {
         </p>
         <p className="copyright">© 2023 Camping De Maasvallei</p>
       </div>
-          <Outlet />
+      <Outlet />
     </div>
-  )
+  );
 }
