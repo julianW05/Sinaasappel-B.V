@@ -36,9 +36,9 @@ export default function Klachten() {
 
     console.log(klachten);
     return (
-        <div className="klachten">
+        <div className="main_back">
             <div className="blur">
-                <div className="klachten_box row">
+                <div className="main_box row">
                     <h1 className="col-md-12">Klachten</h1>
                     <div className="klachten_list col-md-12">
                         <table>

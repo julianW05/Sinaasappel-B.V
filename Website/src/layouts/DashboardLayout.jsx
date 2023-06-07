@@ -86,6 +86,33 @@ export default function DashboardLayout() {
 
                 {isBeheerder ? (
                     <div className="col-md-12 DashNavItem">
+                        <NavLink to={`Klacht_aanmaken/${userID}`}>Klacht Indienen</NavLink>
+                    </div>
+                ): null}
+                {isAdmin ? (
+                    <div className="col-md-12 DashNavItem">
+                        <NavLink to={`Klacht_aanmaken/${userID}`}>Klacht Indienen</NavLink>
+                    </div>
+                ): null}
+                {isShoonamker ? (
+                    <div className="col-md-12 DashNavItem">
+                        <NavLink to={`Klacht_aanmaken/${userID}`}>Klacht Indienen</NavLink>
+                    </div>
+                ): null}
+                {isOnderhoudsmedewerker ? (
+                    <div className="col-md-12 DashNavItem">
+                        <NavLink to={`Klacht_aanmaken/${userID}`}>Klacht Indienen</NavLink>
+                    </div>
+                ): null}
+                {isKlant ? (
+                    <div className="col-md-12 DashNavItem">
+                        <NavLink to={`Klacht_aanmaken/${userID}`}>Klacht Indienen</NavLink>
+                    </div>
+                ): null}
+
+
+                {isBeheerder ? (
+                    <div className="col-md-12 DashNavItem">
                         <NavLink to={`Boekingen?userID=${userID}`}>Boekingen</NavLink>
                     </div>
                 ): null}

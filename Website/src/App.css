@@ -125,7 +125,7 @@
 }
 
 /* ----------KLACHTEN---------- */
-.klachten {
+.main_back {
   width: 100%;
   height: 100%;
   background-image: url(./assets/Banner1.jpg);
@@ -134,7 +134,7 @@
   background-position: center;
 }
 
-.klachten .blur {
+.main_back .blur {
   width: 100%;
   height: 100%;
   display: flex;
@@ -143,7 +143,7 @@
   backdrop-filter: blur(5px);
 }
 
-.klachten .klachten_box {
+.main_back .main_box {
   width: 70%;
   background-color: #4c5b5c;
   border-radius: 10px;
@@ -153,32 +153,32 @@
   padding: 25px;
 }
 
-.klachten .klachten_list {
+.main_back .klachten_list {
   display: flex;
   justify-content: center;
   align-items: start;
 }
 
-.klachten .klachten_list table{
+.main_back .klachten_list table{
   border-collapse: separate;
   border-spacing: 0 15px;
 }
 
-.klachten .klachten_list table td {
+.main_back .klachten_list table td {
   padding: 10px;
 }
 
-.klachten .klachten_list table a {
+.main_back .klachten_list table a {
   color: #f0edee;
   text-decoration: none;
 }
-.klachten .klachten_list table a:hover {
+.main_back .klachten_list table a:hover {
   color: #de541e;
   text-decoration: none;
   cursor: pointer;
 }
 
-.klachten .details_popup {
+.main_back .details_popup {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -188,7 +188,14 @@
   padding: 7px 0;
 }
 
-.klachten .details_popup a {
+.main_back .details_popup a {
   color: red;
   text-decoration: none;
+}
+
+.main_back .klachten_aanmaken {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  align-items: center;
 }

@@ -10,6 +10,7 @@ import {
 // PAGES //
 import Beheer from './pages/Beheer'
 import Klachten from './pages/Klachten'
+import Klacht_aanmaken from './pages/Klacht_aanmaken'
 import Boekingen from './pages/Boekingen'
 import Standplaatsen from './pages/Standplaatsen'
 import Inschrijven from './pages/Inschrijven'
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
             element: <Klachten_details />,
           },
         ],
+      },
+      {
+        path: "klacht_aanmaken/:userID",
+        element: <Klacht_aanmaken />,
       },
       {
         path: "boekingen",
