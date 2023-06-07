@@ -1,27 +1,31 @@
-import './App.css'
+import "./App.css";
 import {
-  createBrowserRouter, 
+  createBrowserRouter,
   createRoutesFromElements,
-  Route, 
-  RouterProvider
-} from 'react-router-dom'
-
+  Route,
+  RouterProvider,
+} from "react-router-dom";
 
 // PAGES //
-import Beheer from './pages/Beheer'
-import Klachten from './pages/Klachten'
-import Boekingen from './pages/Boekingen'
-import Standplaatsen from './pages/Standplaatsen'
-import Inschrijven from './pages/Inschrijven'
+import Beheer from "./pages/Beheer";
+import Klachten from "./pages/Klachten";
+import Boekingen from "./pages/Boekingen";
+import Standplaatsen from "./pages/Standplaatsen";
+import Inschrijven from "./pages/Inschrijven";
 
 // LAYOUTS //
-import LoginLayout from './layouts/LoginLayout'
-import DashboardLayout from './layouts/DashboardLayout';
+import LoginLayout from "./layouts/LoginLayout";
+import DashboardLayout from "./layouts/DashboardLayout";
+import BookingLayout from "./layouts/BookingLayout";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <LoginLayout />,
+  },
+  {
+    path: "boeken",
+    element: <BookingLayout />,
   },
   {
     path: "dashboard",
@@ -52,9 +56,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return (
-      <RouterProvider router={router} />
-  );
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;

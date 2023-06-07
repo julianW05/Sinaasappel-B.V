@@ -16,9 +16,11 @@ export default function Beheer() {
   const [newMedewerker, setNewMedewerker] = useState({
     name: "",
     rol: "",
+    email: "",
     password: "",
   });
   const [showAddForm, setShowAddForm] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const fetchUsers = async () => {
     const q = query(collection(db, "users"));
@@ -49,7 +51,7 @@ export default function Beheer() {
 
   const handleDeleteClick = async (userId) => {
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete this user?"
+      "Weet je zeker dat je dit account wilt verwijderen?"
     );
     if (confirmDelete) {
       const userRef = doc(db, "users", userId);
@@ -69,17 +71,35 @@ export default function Beheer() {
 
   const handleAddMedewerker = async (event) => {
     event.preventDefault();
-    const { name, rol, password } = newMedewerker;
-    if (name && rol && password) {
-      const medewerker = { name, rol, password };
-      const medewerkerRef = await addDoc(collection(db, "users"), medewerker);
-      setUsers((prevUsers) => [
-        ...prevUsers,
-        { id: medewerkerRef.id, ...medewerker },
-      ]);
-      setNewMedewerker({ name: "", rol: "", password: "" });
-      setShowAddForm(false);
+    const { name, rol, email, password } = newMedewerker;
+
+    // Kijk of email veld leeg is!
+    if (email === "") {
+      setErrorMessage("Vul een geldig email in!.");
+      return;
     }
+
+    // Kijk of er al account met dat email is.
+    const existingUser = users.find((user) => user.email === email);
+    if (existingUser) {
+      setErrorMessage("Er bestaat al een account met dit email adres.");
+      return;
+    }
+
+    // Kijk of alle velden zijn ingevuld!
+    if (name === "" || rol === "" || password === "") {
+      setErrorMessage("Vul alle velden in.");
+      return;
+    }
+
+    const medewerker = { name, rol, email, password };
+    const medewerkerRef = await addDoc(collection(db, "users"), medewerker);
+    setUsers((prevUsers) => [
+      ...prevUsers,
+      { id: medewerkerRef.id, ...medewerker },
+    ]);
+    setNewMedewerker({ name: "", rol: "", email: "", password: "" });
+    setShowAddForm(false);
   };
 
   const toggleAddForm = () => {
@@ -91,22 +111,29 @@ export default function Beheer() {
 
   return (
     <div className="main_content">
-      <h1 className="col-md-12">Medewerkers</h1>
       {showAddForm ? (
         <form onSubmit={handleAddMedewerker}>
+          {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
           <input
             type="text"
             name="name"
             value={newMedewerker.name}
             onChange={handleInputChange}
-            placeholder="Name"
+            placeholder="Naam"
+          />
+          <input
+            type="email"
+            name="email"
+            value={newMedewerker.email}
+            onChange={handleInputChange}
+            placeholder="Email"
           />
           <select
             name="rol"
             value={newMedewerker.rol}
             onChange={handleInputChange}
           >
-            <option value="">Select Role</option>
+            <option value="">Selecteer rol</option>
             <option value="beheerder">Beheerder</option>
             <option value="onderhoudsmedewerker">Onderhoudsmedewerker</option>
             <option value="schoonmaker">Schoonmaker</option>
@@ -116,7 +143,7 @@ export default function Beheer() {
             name="password"
             value={newMedewerker.password}
             onChange={handleInputChange}
-            placeholder="Password"
+            placeholder="Wachtwoord"
           />
           <button type="submit">Add Medewerker</button>
           <button type="button" onClick={toggleAddForm}>
@@ -128,36 +155,45 @@ export default function Beheer() {
       )}
       <table>
         <tbody>
-          {medewerkerUsers.map((user) => (
-            <tr key={user.id}>
-              <td>
-                <p>{user.name}</p>
-                <select
-                  id=""
-                  value={user.rol}
-                  onChange={(event) => handleSelectChange(event, user.id)}
-                >
-                  <option value="beheerder">Beheerder</option>
-                  <option value="onderhoudsmedewerker">
-                    Onderhoudsmedewerker
-                  </option>
-                  <option value="schoonmaker">Schoonmaker</option>
-                  <option value="klant">Klant</option>
-                </select>
-                <button onClick={() => handleDeleteClick(user.id)}>
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-          {klantUsers.map((user) => (
-            <tr key={user.id}>
-              <td>
-                <p>{user.name}</p>
-                <p>Rol: {user.rol}</p>
-              </td>
-            </tr>
-          ))}
+          <div className="medewerkers">
+            <h1>Medewerkers</h1>
+            {medewerkerUsers.map((user) => (
+              <tr key={user.id}>
+                <td>
+                  <p>{user.name}</p>
+                  <select
+                    id=""
+                    value={user.rol}
+                    onChange={(event) => handleSelectChange(event, user.id)}
+                  >
+                    <option value="beheerder">Beheerder</option>
+                    <option value="onderhoudsmedewerker">
+                      Onderhoudsmedewerker
+                    </option>
+                    <option value="schoonmaker">Schoonmaker</option>
+                    <option value="klant">Klant</option>
+                  </select>
+                  <button onClick={() => handleDeleteClick(user.id)}>
+                    Verwijder
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </div>
+          <div className="klanten">
+            <h1>Klanten</h1>
+            {klantUsers.map((user) => (
+              <tr key={user.id}>
+                <td>
+                  <p>{user.name}</p>
+                  <p>{user.email}</p>
+                  <button onClick={() => handleDeleteClick(user.id)}>
+                    Verwijder
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </div>
         </tbody>
       </table>
     </div>

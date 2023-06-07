@@ -1,50 +1,64 @@
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from '../Firebase-Config';
-import { useEffect, useState } from 'react'
+import { db } from "../Firebase-Config";
+import { useEffect, useState } from "react";
 
 export default function RootLayout() {
-  const [username, setUserName] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   let userID;
 
-  const fetchFirebaseUser = async() => {
-    if (username != null && password != null) {
-    const q = query(collection(db, "users"), where("name", "==", username), where("password", "==", password));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-    userID = doc.id;
-    console.log(userID);
-    navigate('/dashboard?userID=' + userID);
-    });
+  const fetchFirebaseUser = async () => {
+    if (email !== "" && password !== "") {
+      const q = query(
+        collection(db, "users"),
+        where("email", "==", email),
+        where("password", "==", password)
+      );
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        querySnapshot.forEach((doc) => {
+          userID = doc.id;
+          console.log(userID);
+          navigate("/dashboard?userID=" + userID);
+        });
+      } else {
+        setErrorMessage("Email of wachtwoord incorrect.");
+      }
     } else {
-      alert("Please fill in all fields")
+      setErrorMessage("Vul alle velden in.");
     }
-  }
+  };
 
-  useEffect(() => {
-  }, [])
+  useEffect(() => {}, []);
 
   return (
     <div className="App">
       <div className="login-wrapper">
         <h1>Log In</h1>
+        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
         <form onSubmit={(event) => event.preventDefault()}>
           <label>
-            <p>Gebruikersnaam</p>
-            <input type="text" onChange={e => setUserName(e.target.value)}/>
+            <p>Email</p>
+            <input type="text" onChange={(e) => setEmail(e.target.value)} />
           </label>
           <label>
             <p>Wachtwoord</p>
-            <input type="password" onChange={e => setPassword(e.target.value)}/>
+            <input
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </label>
           <div>
-            <button onClick={fetchFirebaseUser} type="submit">Submit</button>
+            <button onClick={fetchFirebaseUser} type="submit">
+              Log in
+            </button>
           </div>
         </form>
       </div>
-          <Outlet />
+      <Outlet />
     </div>
-  )
+  );
 }
