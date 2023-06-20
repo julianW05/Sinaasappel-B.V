@@ -9,12 +9,10 @@ export default function DashboardLayout() {
     const navigate = useNavigate();
 
     const getUserData = async() => {
-        console.log(userID);
         const docRef = doc(db, "users", userID);
         const docSnap = await getDoc(docRef);
         
         if (docSnap.exists()) {
-            console.log("Document data:", docSnap.data());
             setUser(docSnap.data());
         } else {
             // docSnap.data() will be undefined in this case
@@ -68,21 +66,6 @@ export default function DashboardLayout() {
                         <NavLink to={`Klachten`}>Klachten</NavLink>
                     </div>
                 ): null}
-                {isAdmin ? (
-                    <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Klachten`}>Klachten</NavLink>
-                    </div>
-                ): null}
-                {isShoonamker ? (
-                    <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Klachten`}>Klachten</NavLink>
-                    </div>
-                ): null}
-                {isOnderhoudsmedewerker ? (
-                    <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Klachten`}>Klachten</NavLink>
-                    </div>
-                ): null}
 
 
                 {isBeheerder ? (
@@ -108,6 +91,28 @@ export default function DashboardLayout() {
                 {isKlant ? (
                     <div className="col-md-12 DashNavItem">
                         <NavLink to={`Klacht_aanmaken`}>Klacht Indienen</NavLink>
+                    </div>
+                ): null}
+
+
+                {isBeheerder ? (
+                    <div className="col-md-12 DashNavItem">
+                        <NavLink to={`Klacht_toewijzingen`}>Toewijzingen</NavLink>
+                    </div>
+                ): null}
+                {isAdmin ? (
+                    <div className="col-md-12 DashNavItem">
+                        <NavLink to={`Klacht_toewijzingen`}>Toewijzingen</NavLink>
+                    </div>
+                ): null}
+                {isShoonamker ? (
+                    <div className="col-md-12 DashNavItem">
+                        <NavLink to={`Klacht_toewijzingen`}>Toewijzingen</NavLink>
+                    </div>
+                ): null}
+                {isOnderhoudsmedewerker ? (
+                    <div className="col-md-12 DashNavItem">
+                        <NavLink to={`Klacht_toewijzingen`}>Toewijzingen</NavLink>
                     </div>
                 ): null}
 

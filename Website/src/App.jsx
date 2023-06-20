@@ -9,6 +9,7 @@ import {
 // PAGES //
 import Beheer from './pages/Beheer'
 import Klachten from './pages/Klachten'
+import Klacht_toewijzingen from './pages/Klacht_toewijzingen'
 import Klacht_aanmaken from './pages/Klacht_aanmaken'
 import Boekingen from './pages/Boekingen'
 import Standplaatsen from './pages/Standplaatsen'
@@ -52,6 +53,16 @@ const router = createBrowserRouter([
       {
         path: "klacht_aanmaken",
         element: <Klacht_aanmaken />,
+      },
+      {
+        path: "klacht_toewijzingen",
+        element: <Klacht_toewijzingen />,
+        children: [
+          {
+            path: "details/:klachtID",
+            element: <Klachten_details />,
+          },
+        ],
       },
       {
         path: "boekingen",

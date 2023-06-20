@@ -57,8 +57,7 @@ export default function Klachten() {
         fetchUsers();
         getKlachten();
     }, [])
-
-    console.log(klachten);
+    
     return (
         <div className="main_back">
             <div className="blur">
