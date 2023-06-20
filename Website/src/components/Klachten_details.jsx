@@ -6,7 +6,6 @@ import { db } from '../Firebase-Config';
 export default function Klachten_details() {
     const { userID, klachtID } = useParams();
     const [klacht, setKlacht] = useState(null);
-
     const getKlachten = async() => {
         const docRef = doc(db, "klachten", klachtID);
         const docSnap = await getDoc(docRef);

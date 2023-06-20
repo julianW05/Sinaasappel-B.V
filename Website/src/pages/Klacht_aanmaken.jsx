@@ -18,6 +18,7 @@ export default function Klacht_aanmaken() {
             const docRef2 = await addDoc(collection(db, "klachten"), {
                 titel: title,
                 details: details,
+                toewijzing: "",
                 publisher: docSnap.data().name,
             });
             ref.current.value = "";
