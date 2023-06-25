@@ -16,6 +16,7 @@ import Inschrijven from './pages/Inschrijven'
 
 // COMPONENTS //
 import Klachten_details from './components/Klachten_details'
+import Boekingen_details from './components/Boekingen_details'
 
 // LAYOUTS //
 import LoginLayout from "./layouts/LoginLayout";
@@ -56,6 +57,12 @@ const router = createBrowserRouter([
       {
         path: "boekingen",
         element: <Boekingen />,
+        children: [
+          {
+            path: "details/:userID/:boekingID",
+            element: <Boekingen_details />,
+          },
+        ],
       },
       {
         path: "standplaatsen",
