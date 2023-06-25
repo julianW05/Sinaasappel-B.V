@@ -13,7 +13,6 @@ import Klacht_toewijzingen from './pages/Klacht_toewijzingen'
 import Klacht_aanmaken from './pages/Klacht_aanmaken'
 import Boekingen from './pages/Boekingen'
 import Standplaatsen from './pages/Standplaatsen'
-import Inschrijven from './pages/Inschrijven'
 
 // COMPONENTS //
 import Klachten_details from './components/Klachten_details'
@@ -78,10 +77,6 @@ const router = createBrowserRouter([
       {
         path: "standplaatsen",
         element: <Standplaatsen />,
-      },
-      {
-        path: "inschrijven",
-        element: <Inschrijven />,
       },
     ],
   },

@@ -150,33 +150,6 @@ export default function DashboardLayout() {
                     </div>
                 ): null}
 
-
-                {isBeheerder ? (
-                    <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Inschrijven`}>Inschrijven</NavLink>
-                    </div>
-                ): null}
-                {isAdmin ? (
-                    <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Inschrijven`}>Inschrijven</NavLink>
-                    </div>
-                ): null}
-                {isShoonamker ? (
-                    <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Inschrijven`}>Inschrijven</NavLink>
-                    </div>
-                ): null}
-                {isOnderhoudsmedewerker ? (
-                    <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Inschrijven`}>Inschrijven</NavLink>
-                    </div>
-                ): null}
-                {isKlant ? (
-                    <div className="col-md-12 DashNavItem">
-                        <NavLink to={`Inschrijven`}>Inschrijven</NavLink>
-                    </div>
-                ): null}
-
                 {isBeheerder ? (
                     <div className="col-md-12 DashNavItem">
                         <NavLink to={`Beheer`}>Beheer</NavLink>
