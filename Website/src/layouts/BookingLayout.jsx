@@ -344,35 +344,40 @@ export default function Booking() {
   };
 
   return (
-    <div className="main_content">
-      <h1>Boeking</h1>
-      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+    <div className="main_content_boeken">
+      <div className="main_back">
+        <div className="blur">
+          <div className="main_box row">
+            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
 
-      {step === 1 && (
-        <BookingForm
-          bookingData={bookingData}
-          handleInputChange={handleInputChange}
-          handleSubmit={handleSubmit}
-        />
-      )}
+            {step === 1 && (
+              <BookingForm
+                bookingData={bookingData}
+                handleInputChange={handleInputChange}
+                handleSubmit={handleSubmit}
+              />
+            )}
 
-      {step === 2 && (
-        <>
-          <LoginForm
-            loginData={loginData}
-            handleInputChange={handleInputChange}
-            handlePreviousStep={handlePreviousStep}
-            handleSubmit={handleSubmit}
-            setLogin = {setLogin}
-          />
-          <RegisterForm
-            bookingData={bookingData}
-            handleInputChange={handleInputChange}
-            handleSubmit={handleSubmit}
-            handlePreviousStep={handlePreviousStep}
-          />
-        </>
-      )}
+            {step === 2 && (
+              <>
+                <LoginForm
+                  loginData={loginData}
+                  handleInputChange={handleInputChange}
+                  handlePreviousStep={handlePreviousStep}
+                  handleSubmit={handleSubmit}
+                  setLogin = {setLogin}
+                />
+                <RegisterForm
+                  bookingData={bookingData}
+                  handleInputChange={handleInputChange}
+                  handleSubmit={handleSubmit}
+                  handlePreviousStep={handlePreviousStep}
+                />
+              </>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

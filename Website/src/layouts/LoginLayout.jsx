@@ -40,12 +40,10 @@ export default function RootLayout() {
         <div className="titel">
           <h1>Camping De Maasvallei</h1>
           <div className="line"></div>
-          <p>
-            Welkom op de website van Camping De Maasvallei. Hier kunt u
-            inloggen.
-          </p>
+          <p>Welkom op de website van Camping De Maasvallei. Hier kunt u inloggen of boeken.</p>
         </div>
         <div className="login_box row">
+          <button className="boeken-btn"><NavLink to={'boeken'}>Boeken</NavLink></button>
           <h1 className="col-md-12">Log In</h1>
           {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
           <form

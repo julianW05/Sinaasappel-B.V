@@ -63,6 +63,21 @@
   margin-top: 180px;
 }
 
+.login .left .login_box .boeken-btn {
+  width: 40%;
+  padding: 0;
+  text-align: center;
+}
+
+.login .left .login_box .boeken-btn a {
+  color: #f0edee;
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  display: block;
+  padding: 6px 10px;
+}
+
 .login .left .login_box label {
   margin: 20px 0px;
 }
@@ -74,7 +89,6 @@
   background-color: #de541e;
   transition: all 0.3s ease-in-out;
 }
-
 
 /* ----------DASHBOARD---------- */
 .dashboard {
@@ -220,4 +234,50 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+/* ----------BOEKEN---------- */
+
+.main_content_boeken {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main_content_boeken .main_back {
+  min-height: 100vh;
+}
+
+.main_content_boeken .main_back .blur {
+  min-height: 100vh;
+}
+
+.main_content_boeken form {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  align-items: center;
+  justify-content: center;
+  column-gap: 30px;
+  padding: 0 5%;
+}
+
+.main_content_boeken form .boeken_hoofd_persoon, .main_content_boeken form .boeken_datum {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  align-items: center;
+  justify-content: center;
+  column-gap: 30px;
+}
+
+.main_content_boeken form label {
+  display: flex;
+  flex-direction: column;
+}
+
+.main_content_boeken form button {
+  margin: 0 20%;
 }
