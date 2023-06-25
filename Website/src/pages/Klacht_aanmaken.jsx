@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { NavLink, Link, Outlet, useNavigate, useParams } from "react-router-dom";
 import { collection, query, getDoc, doc, addDoc } from "firebase/firestore";
 import { db } from '../Firebase-Config';
+import Succes_popup from ".././components/Success";
 
 export default function Klacht_aanmaken() {
     const { userID } = useParams();
@@ -17,9 +18,11 @@ export default function Klacht_aanmaken() {
             const docRef2 = await addDoc(collection(db, "klachten"), {
                 titel: title,
                 details: details,
+                toewijzing: "",
                 publisher: docSnap.data().name,
             });
             ref.current.value = "";
+            Succes_popup("Klacht");
         } else {
             console.log("No such document!");
         }
