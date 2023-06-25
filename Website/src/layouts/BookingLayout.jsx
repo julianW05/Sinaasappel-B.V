@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { collection, addDoc, updateDoc, query, where, getDocs } from "firebase/firestore";
+import { collection, addDoc, updateDoc, query, where, getDocs, doc } from "firebase/firestore";
 import { db } from "../Firebase-Config";
 
 import BookingForm from "../components/booking/BookingForm";
@@ -39,7 +39,6 @@ export default function Booking() {
 
   // Login helper
   let isLogin = false;
-
   const setLogin = () => {
     isLogin = true;
   };
@@ -47,6 +46,7 @@ export default function Booking() {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
 
+    // Check aantal mensen
     if (name === "numberOfPeople") {
       const numberOfPeople = parseInt(value);
       setBookingData((prevData) => {
@@ -87,13 +87,13 @@ export default function Booking() {
         const selectedDate = new Date(value);
         const dayOfWeek = selectedDate.getDay();
 
+        // Alleen op zaterdag aankomen
         if (dayOfWeek === 6) {
-          // Saturday, update the arrivalDate
           setBookingData((prevData) => ({
             ...prevData,
             arrivalDate: value,
           }));
-          setErrorMessage(""); // Clear any previous error message
+          setErrorMessage(""); 
         } else {
           setErrorMessage("Je kunt alleen op zaterdag aankomen.");
         }
@@ -105,13 +105,13 @@ export default function Booking() {
       const selectedDate = new Date(value);
       const dayOfWeek = selectedDate.getDay();
 
+      // Alleen op zaterdag vertrekken en minimaal 1 week boeken 
       if (dayOfWeek === 6 && value > arrivalDate) {
-        // Saturday and after arrival date, update the leavingDate
         setBookingData((prevData) => ({
           ...prevData,
           leavingDate: value,
         }));
-        setErrorMessage(""); // Clear any previous error message
+        setErrorMessage(""); 
       } else {
         setErrorMessage("Vertrekdatum moet een zaterdag zijn en na de aankomstdatum liggen.");
       }
@@ -131,23 +131,28 @@ export default function Booking() {
     }
   };
 
+  // Formulier stappen
   const handleNextStep = () => {
     setStep((prevStep) => prevStep + 1);
   };
+  const handlePreviousStep = () => {
+    setStep((prevStep) => prevStep - 1);
+  };
 
+  // Check of email al bestaat
   const checkEmailExists = async (email) => {
     try {
-      // Initialize Firebase Firestore
       const usersRef = collection(db, "users");
       const q = query(usersRef, where("email", "==", email));
       const querySnapshot = await getDocs(q);
   
-      return !querySnapshot.empty; // Email exists if querySnapshot is not empty
+      return !querySnapshot.empty;
     } catch (error) {
       throw error;
     }
   };
 
+  // User inloggen
   const loginUser = async (email, password) => {
     const q = query(
       collection(db, "users"),
@@ -165,16 +170,12 @@ export default function Booking() {
     }
   };
 
-  const handlePreviousStep = () => {
-    setStep((prevStep) => prevStep - 1);
-  };
-
+  // Nieuwe boeking aanmaken
   const handleSubmit = async (event) => {
     event.preventDefault();
     setErrorMessage("");
   
     if (step === 1) {
-      // Validation for Step 1
       if (bookingData.numberOfPeople < 1 || bookingData.numberOfPeople > 6) {
         setErrorMessage("Aantal mensen moet tussen 1 en 6 liggen.");
         return;
@@ -185,13 +186,14 @@ export default function Booking() {
   
     if (step === 2) {
       if (isLogin === true) {
-        // Login form submission
+        // Loin bestaande gebruiker
         const { email, password } = loginData;
         try {
+          // Check login
           const userCredentials = await loginUser(email, password);
           const userID = userCredentials.userID;
   
-          // Step 3: Update booking document with the userID
+          // Nieuwe boeking aanmaken
           const bookingsRef = collection(db, "boekingen");
           const newBooking = {
             "arrive-date": bookingData.arrivalDate,
@@ -211,10 +213,26 @@ export default function Booking() {
               "achternaam": person.lastName,
               "leeftijd": person.age,
             })),
+
           };
           const bookingRef = await addDoc(bookingsRef, newBooking);
-  
-          // Reset bookingData and loginData states
+
+          // BoekingID in standplaats zetten
+          const standplaatsQuery = query(collection(db, "standplaatsen"), where("nummer", "==", parseInt(bookingData.standplaats)));
+          const standplaatsSnapshot = await getDocs(standplaatsQuery);
+          if (!standplaatsSnapshot.empty) {
+            const standplaatsDoc = standplaatsSnapshot.docs[0];
+            const standplaatsRef = doc(db, "standplaatsen", standplaatsDoc.id);
+            const standplaatsData = standplaatsDoc.data();
+            const updatedBoekingen = standplaatsData.boekingen || [];
+            updatedBoekingen.push(bookingRef.id);
+            await updateDoc(standplaatsRef, { boekingen: updatedBoekingen });
+          } else {
+            setErrorMessage("Deze standplaats bestaat niet.");
+            return;
+          }
+
+          // Reset bookingData
           setBookingData({
             numberOfPeople: 1,
             mainBooker: {
@@ -236,7 +254,7 @@ export default function Booking() {
             password: "",
           });
   
-          // Move to the next step
+          // Volgende stap	
           handleNextStep();
           setErrorMessage("Dankjewel voor de boeking");
           return
@@ -246,22 +264,17 @@ export default function Booking() {
           return;
         }
       } else {
-        // Register form submission
+        // Registreer nieuwe gebruiker
         const { email, password } = bookingData.mainBooker;
   
         try {
-          // Check if the email already exists in the database
-          // If it exists, display an error message
-          // If it doesn't exist, create a new user and update the booking document with the new userID
-  
-          // Example code (replace with your Firebase authentication logic)
           const isEmailExists = await checkEmailExists(email);
   
           if (isEmailExists) {
             setErrorMessage("E-mailadres bestaat al.");
-            return; // Stay on step 2 if email already exists
+            return; 
           } else {
-            // Register the user using email and password
+            // Maak nieuwe user aan
             const usersRef = collection(db, "users");
             const newUser = {
               name: bookingData.mainBooker.firstName + " " + bookingData.mainBooker.lastName,
@@ -272,7 +285,7 @@ export default function Booking() {
             const userRef = await addDoc(usersRef, newUser);
             const userID = userRef.id;
   
-            // Step 3: Update booking document with the userID
+            // Maak boeking aan
             const bookingsRef = collection(db, "boekingen");
             const newBooking = {
               "arrive-date": bookingData.arrivalDate,
@@ -295,7 +308,7 @@ export default function Booking() {
             };
             const bookingRef = await addDoc(bookingsRef, newBooking);
   
-            // Reset bookingData and loginData states
+            // Reset bookingdata
             setBookingData({
               numberOfPeople: 1,
               mainBooker: {
@@ -317,7 +330,7 @@ export default function Booking() {
               password: "",
             });
 
-            // Move to the next step
+            // Volgende stap
             handleNextStep();
             setErrorMessage("Dankjewel voor de boeking");
             return

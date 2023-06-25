@@ -31,8 +31,6 @@ export default function Klacht_toewijzingen() {
         };
     }
 
-    console.log(klachten);
-
     const handleDeleteClick = async (klachtID) => {
         const confirmDelete = window.confirm(
           "Weet je zeker dat je deze klacht wilt verwijderen?"
