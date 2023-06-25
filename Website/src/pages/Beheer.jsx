@@ -110,53 +110,98 @@ export default function Beheer() {
   const medewerkerUsers = users.filter((user) => user.rol !== "klant");
 
   return (
-    <div className="main_content">
-      {/* Rest of your code... */}
-      <table>
-        <tbody>
-          <tr>
-            <td>
-              <h1>Medewerkers</h1>
-              {medewerkerUsers.map((user) => (
-                <tr key={user.id}>
-                  <td>
-                    <p>{user.name}</p>
-                    <select
-                      id=""
-                      value={user.rol}
-                      onChange={(event) => handleSelectChange(event, user.id)}
-                    >
-                      <option value="beheerder">Beheerder</option>
-                      <option value="onderhoudsmedewerker">Onderhoudsmedewerker</option>
-                      <option value="schoonmaker">Schoonmaker</option>
-                      <option value="klant">Klant</option>
-                    </select>
-                    <button onClick={() => handleDeleteClick(user.id)}>
-                      Verwijder
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <h1>Klanten</h1>
-              {klantUsers.map((user) => (
-                <tr key={user.id}>
-                  <td>
-                    <p>{user.name}</p>
-                    <p>{user.email}</p>
-                    <button onClick={() => handleDeleteClick(user.id)}>
-                      Verwijder
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div className="main_back">
+      <div className="blur">
+        <div className="main_box">
+          {showAddForm ? (
+            <form onSubmit={handleAddMedewerker}>
+              {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+              <input
+                type="text"
+                name="name"
+                value={newMedewerker.name}
+                onChange={handleInputChange}
+                placeholder="Naam"
+              />
+              <input
+                type="email"
+                name="email"
+                value={newMedewerker.email}
+                onChange={handleInputChange}
+                placeholder="Email"
+              />
+              <select
+                name="rol"
+                value={newMedewerker.rol}
+                onChange={handleInputChange}
+              >
+                <option value="">Selecteer rol</option>
+                <option value="beheerder">Beheerder</option>
+                <option value="onderhoudsmedewerker">Onderhoudsmedewerker</option>
+                <option value="schoonmaker">Schoonmaker</option>
+              </select>
+              <input
+                type="password"
+                name="password"
+                value={newMedewerker.password}
+                onChange={handleInputChange}
+                placeholder="Wachtwoord"
+              />
+              <button type="submit">Add Medewerker</button>
+              <button type="button" onClick={toggleAddForm}>
+                Cancel
+              </button>
+            </form>
+          ) : (
+            <button onClick={toggleAddForm}>Add Medewerker</button>
+          )}
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <h1>Medewerkers</h1>
+                  {medewerkerUsers.map((user) => (
+                    <tr key={user.id}>
+                      <td>
+                        <p>{user.name}</p>
+                        <select
+                          id=""
+                          value={user.rol}
+                          onChange={(event) => handleSelectChange(event, user.id)}
+                        >
+                          <option value="beheerder">Beheerder</option>
+                          <option value="onderhoudsmedewerker">Onderhoudsmedewerker</option>
+                          <option value="schoonmaker">Schoonmaker</option>
+                          <option value="klant">Klant</option>
+                        </select>
+                        <button onClick={() => handleDeleteClick(user.id)}>
+                          Verwijder
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h1>Klanten</h1>
+                  {klantUsers.map((user) => (
+                    <tr key={user.id}>
+                      <td>
+                        <p>{user.name}</p>
+                        <p>{user.email}</p>
+                        <button onClick={() => handleDeleteClick(user.id)}>
+                          Verwijder
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }
