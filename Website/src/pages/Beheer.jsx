@@ -155,47 +155,49 @@ export default function Beheer() {
           ) : (
             <button onClick={toggleAddForm}>Add Medewerker</button>
           )}
-          <table className="beheer" >
+          <table>
             <tbody>
-              <div className="medewerkers">
-                <h1>Medewerkers</h1>
-                {medewerkerUsers.map((user) => (
-                  <tr key={user.id}>
-                    <td>
-                      <p>{user.name}</p>
-                      <select
-                        id=""
-                        value={user.rol}
-                        onChange={(event) => handleSelectChange(event, user.id)}
-                      >
-                        <option value="beheerder">Beheerder</option>
-                        <option value="onderhoudsmedewerker">
-                          Onderhoudsmedewerker
-                        </option>
-                        <option value="schoonmaker">Schoonmaker</option>
-                        <option value="klant">Klant</option>
-                      </select>
-                      <button onClick={() => handleDeleteClick(user.id)}>
-                        Verwijder
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </div>
-              <div className="klanten">
-                <h1>Klanten</h1>
-                {klantUsers.map((user) => (
-                  <tr key={user.id}>
-                    <td>
-                      <p>{user.name}</p>
-                      <p>{user.email}</p>
-                      <button onClick={() => handleDeleteClick(user.id)}>
-                        Verwijder
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </div>
+              <tr>
+                <td>
+                  <h1>Medewerkers</h1>
+                  {medewerkerUsers.map((user) => (
+                    <tr key={user.id}>
+                      <td>
+                        <p>{user.name}</p>
+                        <select
+                          id=""
+                          value={user.rol}
+                          onChange={(event) => handleSelectChange(event, user.id)}
+                        >
+                          <option value="beheerder">Beheerder</option>
+                          <option value="onderhoudsmedewerker">Onderhoudsmedewerker</option>
+                          <option value="schoonmaker">Schoonmaker</option>
+                          <option value="klant">Klant</option>
+                        </select>
+                        <button onClick={() => handleDeleteClick(user.id)}>
+                          Verwijder
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h1>Klanten</h1>
+                  {klantUsers.map((user) => (
+                    <tr key={user.id}>
+                      <td>
+                        <p>{user.name}</p>
+                        <p>{user.email}</p>
+                        <button onClick={() => handleDeleteClick(user.id)}>
+                          Verwijder
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
